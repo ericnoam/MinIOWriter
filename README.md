@@ -49,3 +49,12 @@ mvn scala:run -DmainClass=com.lv.MinIOWriter -DaddArgs=5
 ```
 
 Endpoint, bucketname and auth properties can be configured on `src/main/resources/application.conf`
+
+## Concept
+
+![Big Query Architecture](/notebooks/bqarch.png)
+
+Dremel -> Compute engine for parallel SQL Queries (Spark)
+Colossus -> Columnar Storage format (Parquet)
+Jupiter -> Petabit network for fast shuffles (Spark over TCP)
+Borg -> Hardware resources allocation (Mesos/K8s)
