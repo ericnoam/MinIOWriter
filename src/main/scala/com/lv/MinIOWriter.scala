@@ -43,7 +43,7 @@ object MinIOWriter extends App {
     val audit = AuditFile(player)
     val xml: String = XmlEncoder[AuditFile].encode(audit)
     val fNameSeq = f"$i%02d"
-    val fileName = f"year=2022/month=05/Aleovegas_3_1_00000000${fNameSeq}_202205091022$fNameSeq.xml"
+    val fileName = f"xmls/year=2022/month=05/Aleovegas_3_1_00000000${fNameSeq}_202205091022$fNameSeq.xml"
     println(s"$fileName - $xml")
     val bais = new ByteArrayInputStream(xml.getBytes("UTF-8"))
 
