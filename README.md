@@ -54,7 +54,7 @@ Endpoint, bucketname and auth properties can be configured on `src/main/resource
 
 ![Big Query Architecture](/notebooks/bqarch.png)
 
-Dremel -> Compute engine for parallel SQL Queries (Spark)
-Colossus -> Columnar Storage format (Parquet)
-Jupiter -> Petabit network for fast shuffles (Spark over TCP)
-Borg -> Hardware resources allocation (Mesos/K8s)
+* __Dremel__ -> Compute engine for parallel SQL Queries (_Spark_)
+* __Colossus__ -> Columnar Storage format (_Parquet_)
+* __Jupiter__ -> Petabit network for fast shuffles (_Spark over TCP_)
+* __Borg__ -> Hardware resources allocation (_Mesos/K8s_)
