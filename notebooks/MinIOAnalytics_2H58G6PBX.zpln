@@ -1,0 +1,790 @@
+{
+  "paragraphs": [
+    {
+      "text": "import org.apache.spark.sql.types.{StructType, StructField, StringType, DoubleType, ArrayType, TimestampType}\n\nval transactiontype \u003d new StructType()\n    .add(\"gameId\",StringType,true)\n    .add(\"gameSessionId\",StringType,true)\n    .add(\"processingCode\",StringType,true)\n    .add(\"totalAmount\",DoubleType,true)\n    .add(\"transactionType\",StringType,true)\n    .add(\"trxDatetime\",TimestampType,true)\n\nval customSchema \u003d new StructType()\n    .add(\"playerID\",StringType,true)\n    .add(\"balanceEod\",DoubleType,true)\n    .add(\"Transaction\", ArrayType(transactiontype,true))",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:05:04.213",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.types.{StructType, StructField, StringType, DoubleType, ArrayType, TimestampType}\n\u001b[1m\u001b[34mtransactiontype\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(gameId,StringType,true), StructField(gameSessionId,StringType,true), StructField(processingCode,StringType,true), StructField(totalAmount,DoubleType,true), StructField(transactionType,StringType,true), StructField(trxDatetime,TimestampType,true))\n\u001b[1m\u001b[34mcustomSchema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m \u003d StructType(StructField(playerID,StringType,true), StructField(balanceEod,DoubleType,true), StructField(Transaction,ArrayType(StructType(StructField(gameId,StringType,true), StructField(gameSessionId,StringType,true), StructField(processingCode,StringType...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652103395299_1150070839",
+      "id": "paragraph_1652103395299_1150070839",
+      "dateCreated": "2022-05-09 13:36:35.299",
+      "dateStarted": "2022-05-10 22:05:04.228",
+      "dateFinished": "2022-05-10 22:05:27.088",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import com.databricks.spark.xml._\n\nval dfx \u003d spark.read\n  .option(\"rowTag\", \"Player\")\n  .schema(customSchema)\n  .xml(\"s3a://test/xmls/year\u003d2022/month\u003d05/*.xml\")\n \ndfx.show(5,false)\ndfx.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:05:31.357",
+      "progress": 70,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|playerID |balanceEod|Transaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n+---------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|213800001|637.52    |[{gametitl-0000-0000-0000-DgUta73JEYvU, gamesess-0000-0000-No5G-zuMKYASPGScr, 02, 4.83, B, 2022-04-16 12:45:10}]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |\n|213800002|574.46    |[{gametitl-0000-0000-0000-ohlHOh5JrGni, gamesess-0000-0000-JFQY-40CxHj3pypbD, 03, 50.96, D, 2022-04-03 08:01:52}, {gametitl-0000-0000-0000-B9AxWM5kRzhT, gamesess-0000-0000-JpTu-3XlSepCArFzC, 02, 26.41, S, 2022-04-06 20:19:00}, {gametitl-0000-0000-0000-awKMIa9bwlZi, gamesess-0000-0000-7hLr-YJtP7uvSTNQk, 03, 10.24, O, 2022-04-05 15:49:07}, {gametitl-0000-0000-0000-QbBYB2yXAcTl, gamesess-0000-0000-A9c5-MtZWIzstYe89, 01, 69.77, P, 2022-04-26 07:34:07}, {gametitl-0000-0000-0000-RdckENNMFMP4, gamesess-0000-0000-52pz-ZISx0UFbhKLZ, 01, 62.48, E, 2022-04-30 15:13:19}, {gametitl-0000-0000-0000-EanfghieYmJV, gamesess-0000-0000-yvLW-IXLDoz8F6Qrw, 01, 30.17, E, 2022-04-16 13:34:29}, {gametitl-0000-0000-0000-dFdE9oF1TG8x, gamesess-0000-0000-jDaI-K0Dxl1zHQbQk, 02, 11.11, J, 2022-04-22 10:08:39}]                                                                                                               |\n|213800003|203.55    |[{gametitl-0000-0000-0000-6vVmdNvhShbD, gamesess-0000-0000-k0Zr-dO2ReMubEfle, 03, 12.98, W, 2022-04-17 02:28:51}, {gametitl-0000-0000-0000-y7RzZfyfzOx6, gamesess-0000-0000-HPD2-YCFTkQ4xj5wr, 03, 52.77, S, 2022-04-30 22:13:37}, {gametitl-0000-0000-0000-KiQXrkE4XFJm, gamesess-0000-0000-O3Xr-Z9W5hnQHk4YJ, 01, 68.53, W, 2022-04-16 04:02:37}, {gametitl-0000-0000-0000-Ix2psW0peL9L, gamesess-0000-0000-IDoR-CgqQCGXvXrk8, 02, 61.99, S, 2022-04-25 12:53:18}, {gametitl-0000-0000-0000-GtuKd4N0Ywql, gamesess-0000-0000-Fjr8-4sBAsliVRjNg, 03, 35.46, O, 2022-04-27 21:57:42}, {gametitl-0000-0000-0000-KaosnqMzKq8K, gamesess-0000-0000-nvZ4-xidjjoMAvKdh, 01, 93.76, O, 2022-04-17 12:29:02}, {gametitl-0000-0000-0000-EVlK7h4NplPG, gamesess-0000-0000-NkEA-rBbGjj4MEvfa, 03, 16.24, S, 2022-04-13 19:19:44}]                                                                                                               |\n|213800004|853.82    |null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |\n|213800005|603.76    |[{gametitl-0000-0000-0000-xnX6yKcCCKV7, gamesess-0000-0000-yh5K-xNWr9kMTHWuw, 03, 24.66, B, 2022-04-21 04:52:03}, {gametitl-0000-0000-0000-unOl0oEGSTkU, gamesess-0000-0000-el2Q-GhXNeFr84QjM, 02, 50.59, E, 2022-04-10 12:29:34}, {gametitl-0000-0000-0000-ceThzgFD1h8E, gamesess-0000-0000-aTfX-NEqLMe0WfGA5, 01, 14.76, O, 2022-04-16 16:09:44}, {gametitl-0000-0000-0000-RHEwfQJ8vqFi, gamesess-0000-0000-eGbw-JL4UDlhZ5tel, 01, 24.57, B, 2022-04-26 03:51:09}, {gametitl-0000-0000-0000-kVAPgTPHNOMP, gamesess-0000-0000-kcBd-CN81ajJrj9RP, 02, 10.42, J, 2022-04-17 04:10:22}, {gametitl-0000-0000-0000-suqR3XgvEbCT, gamesess-0000-0000-vySC-J4yYj4MNN2mA, 02, 11.87, J, 2022-04-07 18:40:57}, {gametitl-0000-0000-0000-ztFPmQMSbFrg, gamesess-0000-0000-xUGo-cZAcDEC6W2eH, 03, 40.33, P, 2022-04-13 06:59:33}, {gametitl-0000-0000-0000-t1uqiZg4cDtG, gamesess-0000-0000-NELM-0nsaZ6tRhJ61, 03, 8.6, B, 2022-04-26 23:56:08}]|\n+---------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\nonly showing top 5 rows\n\nimport com.databricks.spark.xml._\n\u001b[1m\u001b[34mdfx\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [playerID: string, balanceEod: double ... 1 more field]\n\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m \u003d 50\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d0"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d1"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d2"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d3"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d4"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652103437443_1727594300",
+      "id": "paragraph_1652103437443_1727594300",
+      "dateCreated": "2022-05-09 13:37:17.443",
+      "dateStarted": "2022-05-10 22:05:31.379",
+      "dateFinished": "2022-05-10 22:05:42.943",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import spark.implicits._\n\nval explodedDf \u003d dfx.select(\u0027playerId, \u0027balanceEod, explode(\u0027Transaction) as \"transaction\")\nexplodedDf.show(3,false)\nexplodedDf.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:11:44.506",
+      "progress": 1,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+----------+---------------------------------------------------------------------------------------------------------------+\n|playerId |balanceEod|transaction                                                                                                    |\n+---------+----------+---------------------------------------------------------------------------------------------------------------+\n|213800001|637.52    |{gametitl-0000-0000-0000-DgUta73JEYvU, gamesess-0000-0000-No5G-zuMKYASPGScr, 02, 4.83, B, 2022-04-16 12:45:10} |\n|213800002|574.46    |{gametitl-0000-0000-0000-ohlHOh5JrGni, gamesess-0000-0000-JFQY-40CxHj3pypbD, 03, 50.96, D, 2022-04-03 08:01:52}|\n|213800002|574.46    |{gametitl-0000-0000-0000-B9AxWM5kRzhT, gamesess-0000-0000-JpTu-3XlSepCArFzC, 02, 26.41, S, 2022-04-06 20:19:00}|\n+---------+----------+---------------------------------------------------------------------------------------------------------------+\nonly showing top 3 rows\n\nimport spark.implicits._\n\u001b[1m\u001b[34mexplodedDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [playerId: string, balanceEod: double ... 1 more field]\n\u001b[1m\u001b[34mres2\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m \u003d 225\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d5"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d6"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d7"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d8"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652103453409_1823422525",
+      "id": "paragraph_1652103453409_1823422525",
+      "dateCreated": "2022-05-09 13:37:33.409",
+      "dateStarted": "2022-05-10 22:11:44.528",
+      "dateFinished": "2022-05-10 22:11:48.108",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val finalDf \u003d explodedDf.select(lit(\"2022\") as \"year\", lit(\"05\") as \"month\", $\"playerId\", $\"balanceEod\",  $\"transaction.processingCode\",  $\"transaction.transactionType\",  $\"transaction.trxDatetime\", $\"transaction.totalAmount\")\nfinalDf.show(3,false)\nfinalDf.createOrReplaceTempView(\"audit\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:14:58.585",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+-----+---------+----------+--------------+---------------+-------------------+-----------+\n|year|month|playerId |balanceEod|processingCode|transactionType|trxDatetime        |totalAmount|\n+----+-----+---------+----------+--------------+---------------+-------------------+-----------+\n|2022|05   |213800001|637.52    |02            |B              |2022-04-16 12:45:10|4.83       |\n|2022|05   |213800002|574.46    |03            |D              |2022-04-03 08:01:52|50.96      |\n|2022|05   |213800002|574.46    |02            |S              |2022-04-06 20:19:00|26.41      |\n+----+-----+---------+----------+--------------+---------------+-------------------+-----------+\nonly showing top 3 rows\n\n\u001b[1m\u001b[34mfinalDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [year: string, month: string ... 6 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d9"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d10"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652103724700_1117205648",
+      "id": "paragraph_1652103724700_1117205648",
+      "dateCreated": "2022-05-09 13:42:04.700",
+      "dateStarted": "2022-05-10 22:14:58.603",
+      "dateFinished": "2022-05-10 22:14:59.934",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\nselect * from audit order by totalAmount desc limit 10",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:16:07.068",
+      "progress": 44,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "year": "string",
+                      "month": "string",
+                      "playerId": "string",
+                      "balanceEod": "string",
+                      "processingCode": "string",
+                      "transactionType": "string",
+                      "trxDatetime": "string",
+                      "totalAmount": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "isDateFormat": false
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "playerId",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "processingCode",
+                  "index": 4.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "balanceEod",
+                  "index": 3.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "year\tmonth\tplayerId\tbalanceEod\tprocessingCode\ttransactionType\ttrxDatetime\ttotalAmount\n2022\t05\t213800050\t789.8\t03\tP\t2022-04-30 12:04:25.0\t99.6\n2022\t05\t213800035\t186.93\t01\tJ\t2022-04-20 02:12:37.0\t99.59\n2022\t05\t213800037\t406.4\t03\tD\t2022-04-28 10:09:13.0\t99.19\n2022\t05\t213800025\t547.35\t02\tJ\t2022-04-06 18:33:21.0\t98.69\n2022\t05\t213800049\t962.87\t02\tJ\t2022-04-27 16:48:29.0\t98.36\n2022\t05\t213800050\t789.8\t02\tP\t2022-04-30 07:50:58.0\t97.7\n2022\t05\t213800048\t948.89\t03\tE\t2022-04-06 14:06:43.0\t97.47\n2022\t05\t213800011\t626.19\t02\tP\t2022-04-14 14:10:17.0\t96.59\n2022\t05\t213800009\t152.2\t02\tW\t2022-04-07 01:31:57.0\t96.03\n2022\t05\t213800047\t385.13\t02\tE\t2022-04-19 14:18:07.0\t95.96\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d11"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652104203242_525549997",
+      "id": "paragraph_1652104203242_525549997",
+      "dateCreated": "2022-05-09 13:50:03.242",
+      "dateStarted": "2022-05-10 22:15:06.135",
+      "dateFinished": "2022-05-10 22:15:07.409",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\nimport org.apache.spark.sql.SaveMode\n\nfinalDf.write\n        .partitionBy(\"year\", \"month\", \"playerId\")\n        .mode(SaveMode.Append)\n        .parquet(s\"s3a://test/parquets\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:18:23.654",
+      "progress": 100,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.SaveMode\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d12"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652105049588_1129929477",
+      "id": "paragraph_1652105049588_1129929477",
+      "dateCreated": "2022-05-09 14:04:09.588",
+      "dateStarted": "2022-05-10 22:18:23.671",
+      "dateFinished": "2022-05-10 22:18:41.387",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\nval dfPs \u003d spark.read.parquet(\"s3a://test/parquets/year\u003d2022/month\u003d05\")\ndfPs.show(3, false)\ndfPs.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:31:14.001",
+      "progress": 33,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+--------------+---------------+-------------------+-----------+---------+\n|balanceEod|processingCode|transactionType|trxDatetime        |totalAmount|playerId |\n+----------+--------------+---------------+-------------------+-----------+---------+\n|626.19    |03            |E              |2022-04-09 13:02:15|35.76      |213800011|\n|626.19    |01            |W              |2022-04-27 21:27:25|82.33      |213800011|\n|626.19    |02            |S              |2022-04-17 04:50:02|68.3       |213800011|\n+----------+--------------+---------------+-------------------+-----------+---------+\nonly showing top 3 rows\n\n\u001b[1m\u001b[34mdfPs\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [balanceEod: double, processingCode: string ... 4 more fields]\n\u001b[1m\u001b[34mres7\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m \u003d 225\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d17"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d18"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d19"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d20"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d21"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652221103669_1658914898",
+      "id": "paragraph_1652221103669_1658914898",
+      "dateCreated": "2022-05-10 22:18:23.669",
+      "dateStarted": "2022-05-10 22:31:14.017",
+      "dateFinished": "2022-05-10 22:31:16.125",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\ndfPs.select(\u0027playerId).distinct.count()",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:32:59.176",
+      "progress": 16,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres9\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m \u003d 44\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d22"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d23"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d24"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652221817949_446076248",
+      "id": "paragraph_1652221817949_446076248",
+      "dateCreated": "2022-05-10 22:30:17.950",
+      "dateStarted": "2022-05-10 22:32:59.195",
+      "dateFinished": "2022-05-10 22:33:00.542",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\ndfPs.groupBy(\u0027playerId).sum(\"totalAmount\").sort(col(\"sum(totalAmount)\").desc).show(10,false)",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:40:31.863",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+------------------+\n|playerId |sum(totalAmount)  |\n+---------+------------------+\n|213800011|636.4599999999999 |\n|213800037|584.2200000000001 |\n|213800047|502.74            |\n|213800032|486.09999999999997|\n|213800025|485.95000000000005|\n|213800019|484.39            |\n|213800030|449.40999999999997|\n|213800035|409.96000000000004|\n|213800020|400.86000000000007|\n|213800003|341.73            |\n+---------+------------------+\nonly showing top 10 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d35"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d36"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652221967286_202608152",
+      "id": "paragraph_1652221967286_202608152",
+      "dateCreated": "2022-05-10 22:32:47.287",
+      "dateStarted": "2022-05-10 22:40:31.877",
+      "dateFinished": "2022-05-10 22:40:33.006",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\ndfPs.createOrReplaceTempView(\"parqs\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:41:11.044",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652222076624_953553610",
+      "id": "paragraph_1652222076624_953553610",
+      "dateCreated": "2022-05-10 22:34:36.624",
+      "dateStarted": "2022-05-10 22:41:11.057",
+      "dateFinished": "2022-05-10 22:41:11.626",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\nselect playerId, balanceEod, totalAmount from parqs group by playerId, balanceEod, totalAmount order by balanceEod DESC limit 20",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:49:27.026",
+      "progress": 16,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": true,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "playerId": "string",
+                      "balanceEod": "string",
+                      "totalAmount": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "balanceEod",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "playerId",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "totalAmount",
+                  "index": 2.0,
+                  "aggr": "avg"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "playerId\tbalanceEod\ttotalAmount\n213800049\t962.87\t78.89\n213800049\t962.87\t98.36\n213800049\t962.87\t10.94\n213800049\t962.87\t29.91\n213800049\t962.87\t27.96\n213800018\t951.35\t74.7\n213800018\t951.35\t70.92\n213800048\t948.89\t8.77\n213800048\t948.89\t58.4\n213800048\t948.89\t68.83\n213800048\t948.89\t97.47\n213800041\t926.87\t6.5\n213800041\t926.87\t75.96\n213800041\t926.87\t86.26\n213800041\t926.87\t28.82\n213800041\t926.87\t23.14\n213800041\t926.87\t50.76\n213800030\t880.64\t41.19\n213800030\t880.64\t71.51\n213800030\t880.64\t71.8\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d49"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d50"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652222471056_666670123",
+      "id": "paragraph_1652222471056_666670123",
+      "dateCreated": "2022-05-10 22:41:11.056",
+      "dateStarted": "2022-05-10 22:49:27.042",
+      "dateFinished": "2022-05-10 22:49:27.833",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-10 22:42:10.507",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652222530506_1011589661",
+      "id": "paragraph_1652222530506_1011589661",
+      "dateCreated": "2022-05-10 22:42:10.507",
+      "status": "READY"
+    }
+  ],
+  "name": "MinIOAnalytics",
+  "id": "2H58G6PBX",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
