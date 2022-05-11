@@ -72,6 +72,10 @@ mvn scala:run -DmainClass=com.lv.MinIOWriter -DaddArgs=5
 Endpoint, bucketname and auth properties can be configured on `src/main/resources/application.conf`
 
 ## Concept
+The underlying concept for this PoC is that it is possible, relatively easy even, to build an `Analytical 
+Engine` on top of Object/Cloud Storage. While Object Storage solutions, such as MinIO, gives us on-premise capabilities where needed,
+Cloud Storage give us close to infinite capacity. In short, the approach demonstrated here give analytic capabilities
+over practically anything we can put on object/cloud storage. 
 
 ![Big Query Architecture](/imgs/bqarch.png)
 
