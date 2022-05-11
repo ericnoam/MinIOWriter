@@ -37,6 +37,27 @@ docker run -u $(id -u) -p 8080:8080 -d
 ```
 Note that `logs` and `notebooks` are persisted in a local volume. See [using the official docker image](https://zeppelin.apache.org/docs/latest/quickstart/install.html#using-the-official-docker-image) for details.
 
+### Zeppelin Conf
+Go to `Interpreter` and search for `spark`:
+
+![Zeppelin Interpreters Configuration](/imgs/zepconf.png)
+
+and `Add` the following properties:
+```properties
+spark.hadoop.fs.s3a.endpoint	172.17.0.3:9000
+spark.hadoop.fs.s3a.access.key	roguedev1
+spark.hadoop.fs.s3a.secret.key	shellaccess
+spark.hadoop.fs.s3a.path.style.access	true
+spark.hadoop.fs.s3a.impl	org.apache.hadoop.fs.s3a.S3AFileSystem
+spark.hadoop.fs.s3a.aws.credentials.provider	org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
+spark.hadoop.fs.s3a.connection.ssl.enabled	false
+```
+
+Add to `spark.jars.packages ` the following coordinates:
+```groovy
+org.apache.hadoop:hadoop-aws:3.2.2,com.databricks:spark-xml_2.12:0.14.0
+```
+
 ## MinIO XML Writer
 To run and create 10 XML files (the default):
 ```shell
@@ -52,7 +73,7 @@ Endpoint, bucketname and auth properties can be configured on `src/main/resource
 
 ## Concept
 
-![Big Query Architecture](/notebooks/bqarch.png)
+![Big Query Architecture](/imgs/bqarch.png)
 
 * __Dremel__ -> Compute engine for parallel SQL Queries (_Spark_)
 * __Colossus__ -> Columnar Storage format (_Parquet_)
