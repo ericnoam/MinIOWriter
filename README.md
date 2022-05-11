@@ -4,7 +4,7 @@ This simple program auto-generates XML strings resembling the taxAccountReport a
 Its intended as a simple PoC to show how using the MinIO Java API we can write 8with the same code) to both MinIO,
 Google Cloud Storage, AWS S3 and any S3-compatible object storage.
 
-Although it's written in Scala, the code is simple enough to be easily translatable to Java or Kotlin.
+Although this PoC is written in Scala, the code is simple enough to be easily translatable to Java or Kotlin and Zeppelin/Spark supports Kotlin, Java, Scala, Python and R. 
 
 ## MinIO Docker
 
