@@ -75,9 +75,9 @@ Endpoint, bucketname and auth properties can be configured on `src/main/resource
 
 ![Big Query Architecture](/imgs/bqarch.png)
 
-* __Dremel__ -> Compute engine for parallel SQL Queries (_Spark_)
+* __Dremel__ -> Compute engine for parallel SQL Queries (_Spark_ via Zeppelin)
 * __Colossus__ -> Columnar Storage format (_Parquet_)
-* __Jupiter__ -> Petabit network for fast shuffles (_Spark over TCP_)
-* __Borg__ -> Hardware resources allocation (_Mesos/K8s_)
+* __Jupiter__ -> Petabit network for fast shuffles (_Spark over TCP_ via Zeppelin)
+* __Borg__ -> Hardware resources allocation (_Mesos/K8s/Docker Compose_)
 * __UI__ -> [Zeppelin](https://zeppelin.apache.org/), [Trino](https://trino.io/)
 
