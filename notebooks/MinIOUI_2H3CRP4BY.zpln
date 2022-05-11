@@ -1,0 +1,362 @@
+{
+  "paragraphs": [
+    {
+      "text": "val df \u003d spark.read.parquet(\"s3a://test/parquets/year\u003d2022/month\u003d05\")\nval pCode \u003d z.select(\"ProcessingCode\", Seq((\"01\",\"NEW\"),\n                                                (\"02\",\"CANCELED\"),\n                                                (\"03\",\"CORRECTION\")))\n\ndf.filter(\u0027processingCode \u003d\u003d\u003d pCode).createOrReplaceTempView(\"audit\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-11 11:59:08.122",
+      "progress": 77,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "runOnSelectionChange": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "ProcessingCode": "01"
+        },
+        "forms": {
+          "ProcessingCode": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "01",
+                "displayName": "NEW"
+              },
+              {
+                "value": "02",
+                "displayName": "CANCELED"
+              },
+              {
+                "value": "03",
+                "displayName": "CORRECTION"
+              }
+            ],
+            "name": "ProcessingCode",
+            "displayName": "ProcessingCode",
+            "defaultValue": "01",
+            "hidden": false
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [balanceEod: double, processingCode: string ... 4 more fields]\n\u001b[1m\u001b[34mpCode\u001b[0m: \u001b[1m\u001b[32mAny\u001b[0m \u003d 01\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d43"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d44"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652268253668_817914938",
+      "id": "paragraph_1652268253668_817914938",
+      "dateCreated": "2022-05-11 11:24:13.668",
+      "dateStarted": "2022-05-11 11:59:08.134",
+      "dateFinished": "2022-05-11 11:59:09.618",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\nselect * from audit",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-11 11:59:11.378",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "balanceEod": "string",
+                      "processingCode": "string",
+                      "transactionType": "string",
+                      "trxDatetime": "string",
+                      "totalAmount": "string",
+                      "playerId": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "balanceEod\tprocessingCode\ttransactionType\ttrxDatetime\ttotalAmount\tplayerId\n626.19\t01\tW\t2022-04-27 21:27:25.0\t82.33\t213800011\n626.19\t01\tD\t2022-04-18 22:18:16.0\t81.14\t213800011\n626.19\t01\tS\t2022-04-11 03:16:37.0\t81.05\t213800011\n547.35\t01\tP\t2022-04-24 07:19:44.0\t59.05\t213800025\n547.35\t01\tE\t2022-04-03 03:14:28.0\t40.19\t213800025\n788.98\t01\tP\t2022-04-04 05:29:15.0\t17.05\t213800019\n788.98\t01\tW\t2022-04-21 19:54:39.0\t5.44\t213800019\n788.98\t01\tD\t2022-04-30 16:47:09.0\t49.11\t213800019\n406.4\t01\tO\t2022-04-03 11:04:25.0\t94.78\t213800037\n406.4\t01\tB\t2022-04-28 04:23:13.0\t79.07\t213800037\n406.4\t01\tJ\t2022-04-24 20:08:26.0\t48.62\t213800037\n406.4\t01\tW\t2022-04-17 20:16:33.0\t65.3\t213800037\n406.4\t01\tS\t2022-04-17 06:02:40.0\t24.73\t213800037\n603.76\t01\tO\t2022-04-16 16:09:44.0\t14.76\t213800005\n603.76\t01\tB\t2022-04-26 03:51:09.0\t24.57\t213800005\n245.07\t01\tE\t2022-04-18 04:55:40.0\t88.67\t213800020\n245.07\t01\tJ\t2022-04-14 16:08:54.0\t9.6\t213800020\n245.07\t01\tO\t2022-04-09 06:03:07.0\t81.8\t213800020\n385.13\t01\tS\t2022-04-21 13:20:10.0\t50.23\t213800047\n385.13\t01\tO\t2022-04-16 17:59:35.0\t78.14\t213800047\n880.64\t01\tE\t2022-04-03 13:15:39.0\t71.51\t213800030\n880.64\t01\tB\t2022-04-03 19:10:09.0\t61.31\t213800030\n880.64\t01\tB\t2022-04-26 12:45:58.0\t11.0\t213800030\n539.13\t01\tP\t2022-04-23 21:32:42.0\t47.75\t213800021\n539.13\t01\tP\t2022-04-25 08:26:00.0\t28.41\t213800021\n152.2\t01\tO\t2022-04-05 04:27:29.0\t14.02\t213800009\n152.2\t01\tS\t2022-04-17 05:31:06.0\t28.32\t213800009\n152.2\t01\tS\t2022-04-17 17:36:44.0\t87.58\t213800009\n331.61\t01\tO\t2022-04-23 02:48:56.0\t22.31\t213800039\n331.61\t01\tE\t2022-04-27 02:36:31.0\t84.45\t213800039\n331.61\t01\tS\t2022-04-06 10:49:29.0\t15.28\t213800039\n331.61\t01\tS\t2022-04-23 10:56:22.0\t47.92\t213800039\n645.64\t01\tJ\t2022-04-02 02:40:11.0\t91.08\t213800032\n645.64\t01\tB\t2022-04-03 16:10:51.0\t69.9\t213800032\n203.55\t01\tW\t2022-04-16 04:02:37.0\t68.53\t213800003\n203.55\t01\tO\t2022-04-17 12:29:02.0\t93.76\t213800003\n232.94\t01\tO\t2022-04-18 16:55:53.0\t88.32\t213800024\n20.04\t01\tO\t2022-04-29 22:32:10.0\t24.35\t213800013\n20.04\t01\tS\t2022-04-24 08:29:07.0\t79.43\t213800013\n20.04\t01\tS\t2022-04-26 19:01:47.0\t14.79\t213800013\n574.46\t01\tP\t2022-04-26 07:34:07.0\t69.77\t213800002\n574.46\t01\tE\t2022-04-30 15:13:19.0\t62.48\t213800002\n574.46\t01\tE\t2022-04-16 13:34:29.0\t30.17\t213800002\n843.07\t01\tP\t2022-04-24 23:00:37.0\t80.35\t213800007\n843.07\t01\tE\t2022-04-23 19:04:01.0\t27.19\t213800007\n211.71\t01\tD\t2022-04-27 21:15:40.0\t26.65\t213800017\n211.71\t01\tP\t2022-04-30 04:29:21.0\t26.56\t213800017\n452.43\t01\tJ\t2022-04-24 06:42:29.0\t67.89\t213800040\n553.39\t01\tJ\t2022-04-28 01:32:59.0\t56.63\t213800027\n926.87\t01\tE\t2022-04-28 05:58:13.0\t28.82\t213800041\n926.87\t01\tO\t2022-04-27 04:14:02.0\t6.5\t213800041\n926.87\t01\tB\t2022-04-03 01:37:56.0\t86.26\t213800041\n186.93\t01\tS\t2022-04-06 03:30:22.0\t88.43\t213800035\n186.93\t01\tD\t2022-04-12 06:29:51.0\t47.26\t213800035\n186.93\t01\tJ\t2022-04-20 02:12:37.0\t99.59\t213800035\n20.08\t01\tS\t2022-04-12 01:28:41.0\t5.18\t213800045\n20.08\t01\tS\t2022-04-11 11:28:10.0\t37.03\t213800045\n20.08\t01\tO\t2022-04-07 23:48:20.0\t45.19\t213800045\n680.43\t01\tW\t2022-04-11 04:23:41.0\t10.5\t213800012\n595.99\t01\tS\t2022-04-25 04:57:10.0\t4.82\t213800036\n241.65\t01\tD\t2022-04-05 22:04:02.0\t29.23\t213800022\n214.27\t01\tS\t2022-04-09 22:23:37.0\t25.2\t213800031\n214.27\t01\tP\t2022-04-03 20:23:56.0\t73.12\t213800031\n248.73\t01\tP\t2022-04-09 17:24:31.0\t18.35\t213800026\n789.8\t01\tS\t2022-04-02 11:10:35.0\t68.34\t213800050\n948.89\t01\tP\t2022-04-25 16:07:48.0\t68.83\t213800048\n962.87\t01\tW\t2022-04-12 06:16:54.0\t27.96\t213800049\n962.87\t01\tD\t2022-04-23 20:47:02.0\t78.89\t213800049\n13.3\t01\tD\t2022-04-10 11:13:52.0\t65.58\t213800046\n305.65\t01\tP\t2022-04-06 10:31:14.0\t85.07\t213800008\n305.65\t01\tS\t2022-04-29 06:03:49.0\t57.72\t213800008\n305.65\t01\tE\t2022-04-25 22:05:39.0\t47.01\t213800008\n340.28\t01\tS\t2022-04-08 03:58:38.0\t73.15\t213800006\n951.35\t01\tP\t2022-04-09 02:20:50.0\t74.7\t213800018\n951.35\t01\tB\t2022-04-12 19:35:13.0\t70.92\t213800018\n369.72\t01\tP\t2022-04-18 15:41:44.0\t55.1\t213800015\n391.56\t01\tP\t2022-04-11 06:01:00.0\t32.9\t213800010\n41.38\t01\tJ\t2022-04-20 20:03:53.0\t3.69\t213800038\n725.44\t01\tE\t2022-04-04 12:53:49.0\t78.01\t213800034\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d45"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d46"
+            },
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d47"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652269383133_1949426444",
+      "id": "paragraph_1652269383133_1949426444",
+      "dateCreated": "2022-05-11 11:43:03.133",
+      "dateStarted": "2022-05-11 11:59:11.393",
+      "dateFinished": "2022-05-11 11:59:12.768",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\nval from \u003d z.textbox(\"from\",\"2022-04-01\")\nval to \u003d z.textbox(\"to\",\"2022-04-30\")\ndf.where(\u0027trxDatetime \u003e\u003d from \u0026\u0026 \u0027trxDatetime \u003c\u003d to).createOrReplaceTempView(\"audit1\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-11 11:59:19.480",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "from": "2022-04-10",
+          "to": "2022-04-19"
+        },
+        "forms": {
+          "from": {
+            "type": "TextBox",
+            "name": "from",
+            "displayName": "from",
+            "defaultValue": "2022-04-01",
+            "hidden": false
+          },
+          "to": {
+            "type": "TextBox",
+            "name": "to",
+            "displayName": "to",
+            "defaultValue": "2022-04-30",
+            "hidden": false
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mfrom\u001b[0m: \u001b[1m\u001b[32mObject\u001b[0m \u003d 2022-04-10\n\u001b[1m\u001b[34mto\u001b[0m: \u001b[1m\u001b[32mObject\u001b[0m \u003d 2022-04-19\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652269477337_1197384310",
+      "id": "paragraph_1652269477337_1197384310",
+      "dateCreated": "2022-05-11 11:44:37.337",
+      "dateStarted": "2022-05-11 11:59:19.495",
+      "dateFinished": "2022-05-11 11:59:20.115",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\nselect * from audit1 order by trxDatetime desc",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-11 12:00:11.319",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "balanceEod": "string",
+                      "processingCode": "string",
+                      "transactionType": "string",
+                      "trxDatetime": "string",
+                      "totalAmount": "string",
+                      "playerId": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "balanceEod\tprocessingCode\ttransactionType\ttrxDatetime\ttotalAmount\tplayerId\n680.43\t02\tP\t2022-04-18 23:33:05.0\t15.93\t213800012\n626.19\t01\tD\t2022-04-18 22:18:16.0\t81.14\t213800011\n232.94\t01\tO\t2022-04-18 16:55:53.0\t88.32\t213800024\n369.72\t01\tP\t2022-04-18 15:41:44.0\t55.1\t213800015\n962.87\t02\tP\t2022-04-18 15:06:04.0\t29.91\t213800049\n724.44\t03\tE\t2022-04-18 06:45:36.0\t1.94\t213800043\n245.07\t01\tE\t2022-04-18 04:55:40.0\t88.67\t213800020\n553.39\t02\tJ\t2022-04-17 21:45:59.0\t45.24\t213800027\n406.4\t01\tW\t2022-04-17 20:16:33.0\t65.3\t213800037\n152.2\t01\tS\t2022-04-17 17:36:44.0\t87.58\t213800009\n595.99\t02\tS\t2022-04-17 16:12:53.0\t63.4\t213800036\n406.4\t03\tO\t2022-04-17 15:37:15.0\t45.96\t213800037\n203.55\t01\tO\t2022-04-17 12:29:02.0\t93.76\t213800003\n232.94\t03\tE\t2022-04-17 09:28:21.0\t12.58\t213800024\n406.4\t01\tS\t2022-04-17 06:02:40.0\t24.73\t213800037\n152.2\t01\tS\t2022-04-17 05:31:06.0\t28.32\t213800009\n626.19\t02\tS\t2022-04-17 04:50:02.0\t68.3\t213800011\n603.76\t02\tJ\t2022-04-17 04:10:22.0\t10.42\t213800005\n203.55\t03\tW\t2022-04-17 02:28:51.0\t12.98\t213800003\n385.13\t03\tS\t2022-04-16 23:04:18.0\t80.82\t213800047\n331.61\t02\tD\t2022-04-16 22:47:00.0\t49.0\t213800039\n385.13\t01\tO\t2022-04-16 17:59:35.0\t78.14\t213800047\n603.76\t01\tO\t2022-04-16 16:09:44.0\t14.76\t213800005\n574.46\t01\tE\t2022-04-16 13:34:29.0\t30.17\t213800002\n637.52\t02\tB\t2022-04-16 12:45:10.0\t4.83\t213800001\n186.93\t03\tS\t2022-04-16 06:23:06.0\t81.89\t213800035\n203.55\t01\tW\t2022-04-16 04:02:37.0\t68.53\t213800003\n553.39\t03\tD\t2022-04-16 03:18:53.0\t31.46\t213800027\n214.27\t02\tE\t2022-04-16 03:02:16.0\t35.31\t213800031\n880.64\t02\tE\t2022-04-16 02:11:30.0\t41.19\t213800030\n20.08\t02\tB\t2022-04-15 18:35:14.0\t49.53\t213800045\n245.07\t03\tB\t2022-04-15 13:39:05.0\t55.24\t213800020\n539.13\t02\tE\t2022-04-15 04:48:07.0\t26.07\t213800021\n788.98\t02\tJ\t2022-04-14 22:59:48.0\t90.5\t213800019\n245.07\t01\tJ\t2022-04-14 16:08:54.0\t9.6\t213800020\n626.19\t02\tP\t2022-04-14 14:10:17.0\t96.59\t213800011\n539.13\t03\tE\t2022-04-14 12:33:49.0\t83.06\t213800021\n880.64\t02\tO\t2022-04-14 09:48:55.0\t71.8\t213800030\n391.56\t02\tB\t2022-04-14 07:02:26.0\t78.6\t213800010\n232.94\t03\tE\t2022-04-14 06:42:54.0\t38.5\t213800024\n331.61\t03\tW\t2022-04-14 01:55:36.0\t9.98\t213800039\n962.87\t02\tE\t2022-04-14 01:30:42.0\t10.94\t213800049\n788.98\t02\tE\t2022-04-13 20:11:54.0\t42.9\t213800019\n203.55\t03\tS\t2022-04-13 19:19:44.0\t16.24\t213800003\n603.76\t03\tP\t2022-04-13 06:59:33.0\t40.33\t213800005\n948.89\t03\tE\t2022-04-13 04:14:27.0\t8.77\t213800048\n152.2\t03\tW\t2022-04-13 02:49:02.0\t55.69\t213800009\n843.07\t03\tP\t2022-04-12 21:21:02.0\t57.5\t213800007\n951.35\t01\tB\t2022-04-12 19:35:13.0\t70.92\t213800018\n595.99\t03\tJ\t2022-04-12 15:57:18.0\t24.86\t213800036\n788.98\t03\tD\t2022-04-12 15:44:13.0\t65.48\t213800019\n595.99\t03\tE\t2022-04-12 15:23:15.0\t4.44\t213800036\n245.07\t02\tD\t2022-04-12 12:40:33.0\t38.17\t213800020\n926.87\t03\tW\t2022-04-12 09:27:44.0\t50.76\t213800041\n186.93\t01\tD\t2022-04-12 06:29:51.0\t47.26\t213800035\n962.87\t01\tW\t2022-04-12 06:16:54.0\t27.96\t213800049\n539.13\t02\tE\t2022-04-12 05:37:22.0\t6.41\t213800021\n20.08\t01\tS\t2022-04-12 01:28:41.0\t5.18\t213800045\n186.93\t02\tE\t2022-04-11 19:50:46.0\t23.14\t213800035\n20.08\t01\tS\t2022-04-11 11:28:10.0\t37.03\t213800045\n391.56\t01\tP\t2022-04-11 06:01:00.0\t32.9\t213800010\n680.43\t01\tW\t2022-04-11 04:23:41.0\t10.5\t213800012\n626.19\t01\tS\t2022-04-11 03:16:37.0\t81.05\t213800011\n20.04\t02\tB\t2022-04-10 19:50:04.0\t39.33\t213800013\n547.35\t02\tP\t2022-04-10 18:55:43.0\t93.99\t213800025\n385.13\t02\tO\t2022-04-10 18:00:29.0\t43.78\t213800047\n603.76\t02\tE\t2022-04-10 12:29:34.0\t50.59\t213800005\n16.77\t02\tB\t2022-04-10 12:13:07.0\t86.09\t213800014\n13.3\t01\tD\t2022-04-10 11:13:52.0\t65.58\t213800046\n680.43\t02\tP\t2022-04-10 09:53:08.0\t9.0\t213800012\n241.65\t02\tP\t2022-04-10 08:14:27.0\t43.86\t213800022\n867.39\t03\tJ\t2022-04-10 02:52:32.0\t39.81\t213800033\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d51"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652270207889_203186395",
+      "id": "paragraph_1652270207889_203186395",
+      "dateCreated": "2022-05-11 11:56:47.890",
+      "dateStarted": "2022-05-11 12:00:11.332",
+      "dateFinished": "2022-05-11 12:00:12.366",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-11 11:58:16.656",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652270296656_1461473701",
+      "id": "paragraph_1652270296656_1461473701",
+      "dateCreated": "2022-05-11 11:58:16.656",
+      "status": "READY"
+    }
+  ],
+  "name": "MinIOUI",
+  "id": "2H3CRP4BY",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "simple",
+    "personalizedMode": "false"
+  },
+  "info": {}
+}
