@@ -1,10 +1,279 @@
 {
   "paragraphs": [
     {
-      "text": "val df \u003d spark.read.parquet(\"s3a://test/parquets/year\u003d2022/month\u003d05\")\nval pCode \u003d z.select(\"ProcessingCode\", Seq((\"01\",\"NEW\"),\n                                                (\"02\",\"CANCELED\"),\n                                                (\"03\",\"CORRECTION\")))\n\ndf.filter(\u0027processingCode \u003d\u003d\u003d pCode).createOrReplaceTempView(\"audit\")",
+      "text": "val df \u003d spark.read.parquet(\"s3a://test/parquets/year\u003d2022/month\u003d05\")\ndf.filter(\u0027playerId \u003d\u003d\u003d z.textbox(\"PlayerUID\")).show(100,false)",
       "user": "anonymous",
-      "dateUpdated": "2022-05-11 11:59:08.122",
-      "progress": 77,
+      "dateUpdated": "2022-05-12 11:08:20.558",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "runOnSelectionChange": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "ProcessingCode": "01",
+          "PlayerUID": "213800005"
+        },
+        "forms": {
+          "PlayerUID": {
+            "type": "TextBox",
+            "name": "PlayerUID",
+            "displayName": "PlayerUID",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652268253668_817914938",
+      "id": "paragraph_1652268253668_817914938",
+      "dateCreated": "2022-05-11 11:24:13.668",
+      "dateStarted": "2022-05-12 11:07:58.260",
+      "dateFinished": "2022-05-12 11:07:59.300",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val players: Seq[(String,String)] \u003d df.select(\u0027playerId).distinct().sort(\u0027playerId).map(p \u003d\u003e {val v \u003d p.getInt(0); (v.toString,v.toString)}).collect()\ndf.filter(\u0027playerId \u003d\u003d\u003d z.select(\"PlayerUID\", players.toSeq)).show(100,false)",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-12 12:10:39.198",
+      "progress": 12,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "runOnSelectionChange": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "PlayerUID": "213800020"
+        },
+        "forms": {
+          "PlayerUID": {
+            "type": "Select",
+            "options": [
+              {
+                "value": "213800001",
+                "displayName": "213800001"
+              },
+              {
+                "value": "213800002",
+                "displayName": "213800002"
+              },
+              {
+                "value": "213800003",
+                "displayName": "213800003"
+              },
+              {
+                "value": "213800005",
+                "displayName": "213800005"
+              },
+              {
+                "value": "213800006",
+                "displayName": "213800006"
+              },
+              {
+                "value": "213800007",
+                "displayName": "213800007"
+              },
+              {
+                "value": "213800008",
+                "displayName": "213800008"
+              },
+              {
+                "value": "213800009",
+                "displayName": "213800009"
+              },
+              {
+                "value": "213800010",
+                "displayName": "213800010"
+              },
+              {
+                "value": "213800011",
+                "displayName": "213800011"
+              },
+              {
+                "value": "213800012",
+                "displayName": "213800012"
+              },
+              {
+                "value": "213800013",
+                "displayName": "213800013"
+              },
+              {
+                "value": "213800014",
+                "displayName": "213800014"
+              },
+              {
+                "value": "213800015",
+                "displayName": "213800015"
+              },
+              {
+                "value": "213800017",
+                "displayName": "213800017"
+              },
+              {
+                "value": "213800018",
+                "displayName": "213800018"
+              },
+              {
+                "value": "213800019",
+                "displayName": "213800019"
+              },
+              {
+                "value": "213800020",
+                "displayName": "213800020"
+              },
+              {
+                "value": "213800021",
+                "displayName": "213800021"
+              },
+              {
+                "value": "213800022",
+                "displayName": "213800022"
+              },
+              {
+                "value": "213800024",
+                "displayName": "213800024"
+              },
+              {
+                "value": "213800025",
+                "displayName": "213800025"
+              },
+              {
+                "value": "213800026",
+                "displayName": "213800026"
+              },
+              {
+                "value": "213800027",
+                "displayName": "213800027"
+              },
+              {
+                "value": "213800030",
+                "displayName": "213800030"
+              },
+              {
+                "value": "213800031",
+                "displayName": "213800031"
+              },
+              {
+                "value": "213800032",
+                "displayName": "213800032"
+              },
+              {
+                "value": "213800033",
+                "displayName": "213800033"
+              },
+              {
+                "value": "213800034",
+                "displayName": "213800034"
+              },
+              {
+                "value": "213800035",
+                "displayName": "213800035"
+              },
+              {
+                "value": "213800036",
+                "displayName": "213800036"
+              },
+              {
+                "value": "213800037",
+                "displayName": "213800037"
+              },
+              {
+                "value": "213800038",
+                "displayName": "213800038"
+              },
+              {
+                "value": "213800039",
+                "displayName": "213800039"
+              },
+              {
+                "value": "213800040",
+                "displayName": "213800040"
+              },
+              {
+                "value": "213800041",
+                "displayName": "213800041"
+              },
+              {
+                "value": "213800043",
+                "displayName": "213800043"
+              },
+              {
+                "value": "213800044",
+                "displayName": "213800044"
+              },
+              {
+                "value": "213800045",
+                "displayName": "213800045"
+              },
+              {
+                "value": "213800046",
+                "displayName": "213800046"
+              },
+              {
+                "value": "213800047",
+                "displayName": "213800047"
+              },
+              {
+                "value": "213800048",
+                "displayName": "213800048"
+              },
+              {
+                "value": "213800049",
+                "displayName": "213800049"
+              },
+              {
+                "value": "213800050",
+                "displayName": "213800050"
+              }
+            ],
+            "name": "PlayerUID",
+            "displayName": "PlayerUID",
+            "defaultValue": "213800001",
+            "hidden": false
+          }
+        }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652353702626_1450618951",
+      "id": "paragraph_1652353702626_1450618951",
+      "dateCreated": "2022-05-12 11:08:22.630",
+      "dateStarted": "2022-05-12 12:10:39.217",
+      "dateFinished": "2022-05-12 12:10:40.795",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val pCode \u003d z.select(\"ProcessingCode\", Seq((\"01\",\"NEW\"),\n                                                (\"02\",\"CANCELED\"),\n                                                (\"03\",\"CORRECTION\")))\n\ndf.filter(\u0027processingCode \u003d\u003d\u003d pCode).createOrReplaceTempView(\"audit\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-12 12:13:02.643",
+      "progress": 0,
       "config": {
         "tableHide": true,
         "editorSetting": {
@@ -54,34 +323,18 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [balanceEod: double, processingCode: string ... 4 more fields]\n\u001b[1m\u001b[34mpCode\u001b[0m: \u001b[1m\u001b[32mAny\u001b[0m \u003d 01\n"
+            "data": "\u001b[1m\u001b[34mpCode\u001b[0m: \u001b[1m\u001b[32mAny\u001b[0m \u003d 01\n"
           }
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d43"
-            },
-            {
-              "jobUrl": "http://c5b732090beb:4040/jobs/job?id\u003d44"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1652268253668_817914938",
-      "id": "paragraph_1652268253668_817914938",
-      "dateCreated": "2022-05-11 11:24:13.668",
-      "dateStarted": "2022-05-11 11:59:08.134",
-      "dateFinished": "2022-05-11 11:59:09.618",
+      "jobName": "paragraph_1652353040385_388334615",
+      "id": "paragraph_1652353040385_388334615",
+      "dateCreated": "2022-05-12 10:57:20.385",
+      "dateStarted": "2022-05-12 11:07:01.889",
+      "dateFinished": "2022-05-12 11:07:02.317",
       "status": "FINISHED"
     },
     {
@@ -181,7 +434,7 @@
     {
       "text": "%spark\nval from \u003d z.textbox(\"from\",\"2022-04-01\")\nval to \u003d z.textbox(\"to\",\"2022-04-30\")\ndf.where(\u0027trxDatetime \u003e\u003d from \u0026\u0026 \u0027trxDatetime \u003c\u003d to).createOrReplaceTempView(\"audit1\")",
       "user": "anonymous",
-      "dateUpdated": "2022-05-11 11:59:19.480",
+      "dateUpdated": "2022-05-12 10:58:22.937",
       "progress": 0,
       "config": {
         "tableHide": true,
@@ -326,24 +579,6 @@
       "dateStarted": "2022-05-11 12:00:11.332",
       "dateFinished": "2022-05-11 12:00:12.366",
       "status": "FINISHED"
-    },
-    {
-      "text": "%spark.sql\n",
-      "user": "anonymous",
-      "dateUpdated": "2022-05-11 11:58:16.656",
-      "progress": 0,
-      "config": {},
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1652270296656_1461473701",
-      "id": "paragraph_1652270296656_1461473701",
-      "dateCreated": "2022-05-11 11:58:16.656",
-      "status": "READY"
     }
   ],
   "name": "MinIOUI",

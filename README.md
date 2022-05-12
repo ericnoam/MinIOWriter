@@ -77,6 +77,7 @@ Engine` on top of Object/Cloud Storage. While Object Storage solutions, such as 
 Cloud Storage give us close to infinite capacity. In short, the approach demonstrated here give analytic capabilities
 over practically anything we can put on object/cloud storage. 
 
+### Big Query Architecture
 ![Big Query Architecture](/imgs/bqarch.png)
 
 * __Dremel__ -> Compute engine for parallel SQL Queries (_Spark_ via Zeppelin)
